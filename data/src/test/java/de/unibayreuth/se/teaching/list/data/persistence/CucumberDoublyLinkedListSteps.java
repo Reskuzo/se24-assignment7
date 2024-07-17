@@ -23,7 +23,7 @@ public class CucumberDoublyLinkedListSteps {
 
     @Before
     public void initialization() {
-        list = new DoublyLinkedList();
+        list = list.get_instance();
     }
 
     // Given -----------------------------------------------------------------------

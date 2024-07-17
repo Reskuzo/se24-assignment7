@@ -16,11 +16,17 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 public class DoublyLinkedList {
+    private static DoublyLinkedList dll;
     private Element start;
     private Element end;
     private int length;
 
     private static final Logger logger = LoggerFactory.getLogger(DoublyLinkedList.class);
+    private DoublyLinkedList() {}
+    public static DoublyLinkedList get_instance(){
+        if (dll == null){dll = new DoublyLinkedList();}
+        return dll;
+    }
 
     /**
      * Add an element at the end of the list
