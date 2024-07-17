@@ -33,6 +33,11 @@ class DoublyLinkedListTest {
         Assertions.assertNull(list.getEnd().getPrev());
         Assertions.assertNull(list.getEnd().getNext());
     }
+    @Test
+    void insert_double_in_empty_list(){
+        list.insert(0.5d);
+        Assertions.assertEquals(0.5d, list.getStart().getValue());
+    }
 
     @Test
     void testInsertNewMinimum() {
