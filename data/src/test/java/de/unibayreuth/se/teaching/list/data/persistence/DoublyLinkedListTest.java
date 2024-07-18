@@ -240,6 +240,19 @@ class DoublyLinkedListTest {
         Assertions.assertEquals("0.9<->0.5<->0.4", list.toString());
     }
 
+
+    @Test
+    void testObserverRegistration(){
+        ListClearedObserver obs1 = new ListClearedObserver();
+        ListClearedObserver obs2 = new ListClearedObserver();
+
+        list.register_obs(obs1);
+        list.register_obs(obs2);
+        list.clear();
+        Assertions.assertEquals(1, obs1.clearedCount);
+        Assertions.assertEquals(1, obs2.clearedCount);
+    }
+
     /**
      * Helper method to test begin and end pointers of a doubly linked list
      * @param list List to test

@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Component;
 @Setter
 @Slf4j
 @Component
-public class DoublyLinkedList {
+public class DoublyLinkedList implements Subject {
     private static DoublyLinkedList dll;
     private Element start;
     private Element end;
@@ -134,6 +135,7 @@ public class DoublyLinkedList {
         start = null;
         end = null;
         length = 0;
+        notify_obs();
     }
 
     /**
@@ -181,6 +183,22 @@ public class DoublyLinkedList {
      */
     public void insert(double value) {
         insert(new Element(value));
+    }
+
+    @Override
+    public void register_obs(@NotNull Observer observer) {
+        obs.add(observer);
+    }
+
+    @Override
+    public void unregister_obs(@NotNull Observer observer) {
+            obs.remove(observer);
+    }
+
+    @Override
+    public void notify_obs() {
+        for (Observer observer : obs)
+            observer.update();
     }
 
     /**
